@@ -1,3 +1,2 @@
 # Black-Hole
-Simulation of a black hole with Newtonian physics (possibly relativity as well)
-More to be added soon...
+A simple Newtonian (with limitations on speed) simmulation of light approaching a supermassive black hole. Light comes in from the right and is bent by the gravity of the black hole. A simple visualization of _light orbits_ (orange) and _accretion discs_ (grey) is included as well as an _event horizon_ (black) which spans a _Schwarzschild radius_ from the singularity. Trails for light particles are also included for greater ease of visualization of photon trajectories
