@@ -15,11 +15,13 @@ const G = 2;
 const dt = 0.1;
 const period = 50;
 const error = 2.1;
+const numstars = 1;
 
 let m87;
 let star1;
 
 const particles = [];
+const stars = [];
 let start, end;
 
 function setup() {
@@ -32,7 +34,14 @@ function setup() {
   for (let y = 0; y < start; y += 10) {
     particles.push(new Photon(width - 20, y, -c, 0));
   }
-  star1 = new Star(50, 50, 10, c/6, 0);
+  
+  stars.push(new Star(50, 50, 10, 5, 0));
+  
+  for (let j = 0; j < numstars; j++) {
+    let vsx = Math.floor(Math.random() * c);
+    let vsy = Math.floor(Math.random() * Math.sqrt((c * c) - (vsx * vsx)));
+    stars.push(new Star(Math.floor(Math.random() * width), Math.floor(Math.random() * height), Math.floor(Math.random() * 10), vsx, vsy));
+  }
 }
 
 let i = 0;
@@ -46,10 +55,12 @@ function draw() {
   line(0, end, width, end);
   
   if (i === period) {
-    particles.push(new Photon(star1.position.x +            star1.radius, star1.position.y, c, 0));
-    particles.push(new Photon(star1.position.x -  star1.radius, star1.position.y, -c, 0));
-    particles.push(new Photon(star1.position.x,  star1.position.y + star1.radius, 0, c));
-    particles.push(new Photon(star1.position.x,    star1.position.y - star1.radius, 0, -c));
+    for (let s of stars) {
+     particles.push(new Photon(s.position.x + s.radius, s.position.y, c, 0));
+     particles.push(new Photon(s.position.x - s.radius,s.position.y, -c, 0));
+     particles.push(new Photon(s.position.x, s.position.y + s.radius, 0, c));
+     particles.push(new Photon(s.position.x, s.position.y - s.radius, 0, -c));
+    }
     i = 0;
   } else {
     i++;
@@ -59,8 +70,10 @@ function draw() {
     p.update();
     p.show();
   }
-  m87.attract(star1);
-  star1.move();
-  star1.show();
+  for (let q of stars) {
+  m87.attract(q);
+  q.move();
+  q.show();
+  }
   m87.show();
 }
