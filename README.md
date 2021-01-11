@@ -1,3 +1,2 @@
 # Black-Hole
-Simulation of a black hole with Newtonian physics (possibly relativity as well)
-More to be added soon...
+An update to the original black hole simulation by _The Coding Train_. The update includes a fundamental correction to the code by _multiplying any acceleration by a timestep_ before adding it to velocity. An optional gravity _error correction_ variable was also introduced to make sure only photons within the 2.6 R<sub>s</sub> are sucked into the hole. The update adds a _star_ (and possibly more) which, as well as being attracted to the hole, acts as a blackbody emitter, _emitting light radially_ as it travels.
