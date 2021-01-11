@@ -9,12 +9,25 @@ class Blackhole {
     const force = p5.Vector.sub(this.pos, photon.pos);
     const r = force.mag();
     const fg = G * this.mass / (r * r);
-    force.setMag(fg);
+    force.setMag(fg*dt*error);
     photon.vel.add(force);
     photon.vel.setMag(c);
 
     if (r < this.rs) {
       photon.stop();
+    }
+  }
+  
+  attract(star) {
+    const staracc = p5.Vector.sub(this.pos, star.position);
+    const rho = staracc.mag();
+    const grav = G * this.mass / (rho * rho);
+    staracc.setMag(grav*dt*error);
+    star.velocity.add(staracc);
+    star.velocity.limit(c);
+    
+    if (rho + star.radius < this.rs) {
+      star.stop();
     }
   }
 
